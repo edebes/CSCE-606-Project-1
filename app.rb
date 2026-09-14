@@ -13,34 +13,45 @@ class Word < Sequel::Model(:words)
     plugin :json_serializer
 end
 
+# get words
 get '/words' do
-    words = Word.all
-    json words
+    Word.map(:text).join("\n") + "\n"
 end
 
+# create new words
 post '/words' do
     data = JSON.parse(request.body.read)
     word = Word.create(text: data['text'])
-    json word
+    "Word created: #{word.text}" + "\n"
 end
 
+# get a specific word
 get '/words/:id' do
     word = Word[params[:id]]
     halt 404, json({ error: 'Word not found' }) unless word
-    json word
+    "#{word.text}" + "\n"
 end
 
+# update a specific word
 put '/words/:id' do |id|
     word = Word[params[:id]]
+    oldWord = word.text
     halt 404, json({ error: 'Word not found' }) unless word
     data = JSON.parse(request.body.read)
     word.update(text: data['text'])
-    json word
+    "Word updated from #{oldWord} to #{word.text}" + "\n"
 end
 
+# delete a specific word
 delete '/words/:id' do |id|
     word = Word[params[:id]]
     halt 404, json({ error: 'Word not found' }) unless word
     word.delete
-    json word
+    "Word deleted: #{word.text}" + "\n"
+end
+
+# clear all words
+delete '/words' do
+    Word.dataset.delete
+    "All words deleted" + "\n"
 end
