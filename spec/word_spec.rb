@@ -53,6 +53,11 @@ RSpec.describe Word do
     expect { WordCLI.add_word }.to output(/Enter new word:/).to_stdout
   end
 
+  it 'returns invalid message when adding a word with non-letter characters' do
+    allow_any_instance_of(Object).to receive(:gets).and_return("invalid123")
+    expect { WordCLI.add_word }.to output(/Invalid word. Please enter a word with only letters./).to_stdout
+  end
+
   it 'updates a word in the CLI' do
     Word.create(text: "testEleven")
     allow_any_instance_of(Object).to receive(:gets).and_return("testEleven")
