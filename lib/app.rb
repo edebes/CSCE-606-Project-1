@@ -13,45 +13,104 @@ class Word < Sequel::Model(:words)
     plugin :json_serializer
 end
 
-# get words
-get '/words' do
-    Word.map(:text).join("\n") + "\n"
+class WordCLI
+    def self.run
+        puts "Welcome to the Wordbank!"
+        loop do
+            puts "\n\nPlease select an option:"
+            puts "1. List all words"
+            puts "2. Add a word"
+            puts "3. Update a word"
+            puts "4. Delete a word"
+            puts "5. Delete all words"
+            puts "6. Return to typing menu"
+            choice = gets.chomp.to_i
+            case choice
+            when 1
+                self.list_words
+            when 2
+                self.add_word
+            when 3
+                self.update_word
+            when 4
+                self.delete_word
+            when 5
+                self.delete_all_words
+            when 6
+                break # will return to typing menu once it has been implemented
+            else
+                puts "Invalid option. Please try again."
+            end
+        end
+    end
+
+    def self.list_words
+        words = Word.all
+        if words.empty?
+            puts "\nNo words in wordbank."
+        else
+            puts "\nWords:"
+            words.each { |word|
+                puts "#{word.text}"
+            }
+        end
+    end
+
+    def self.add_word
+        puts "\nEnter new word:"
+        text = gets.chomp
+        word = Word.create(text: text)
+        puts "\nWord added: #{word.text}"
+    end
+
+    def self.update_word
+        if Word.count == 0
+            puts "\nNo words in wordbank to update."
+            return
+        end
+        puts "\nEnter the word to update:"
+        old_text = gets.chomp
+        word = Word.find(text: old_text)
+        if word
+            puts "\nEnter the updated word:"
+            new_text = gets.chomp
+            word.update(text: new_text)
+            puts "\nWord updated from #{old_text} to #{new_text}"
+        else
+            puts "\nWord not found."
+        end
+    end
+
+    def self.delete_word
+        if Word.count == 0
+            puts "\nNo words in wordbank to delete."
+            return
+        end
+        puts "\nEnter the word to delete:"
+        text = gets.chomp
+        word = Word.find(text: text)
+        if word
+            word.delete
+            puts "\nWord deleted: #{word.text}"
+        else
+            puts "\nWord not found."
+        end
+    end
+
+    def self.delete_all_words
+        if Word.count == 0
+            puts "\nNo words in wordbank to delete."
+            return
+        end
+        puts "\nAre you sure you want to delete all words? (y/n)"
+        ans = gets.chomp.downcase
+        if ans == 'y'
+            Word.dataset.delete
+            puts "\nAll words deleted."
+        end
+    end
 end
 
-# create new words
-post '/words' do
-    data = JSON.parse(request.body.read)
-    word = Word.create(text: data['text'])
-    "Word created: #{word.text}" + "\n"
-end
-
-# get a specific word
-get '/words/:id' do
-    word = Word[params[:id]]
-    halt 404, json({ error: 'Word not found' }) unless word
-    "#{word.text}" + "\n"
-end
-
-# update a specific word
-put '/words/:id' do |id|
-    word = Word[params[:id]]
-    oldWord = word.text
-    halt 404, json({ error: 'Word not found' }) unless word
-    data = JSON.parse(request.body.read)
-    word.update(text: data['text'])
-    "Word updated from #{oldWord} to #{word.text}" + "\n"
-end
-
-# delete a specific word
-delete '/words/:id' do |id|
-    word = Word[params[:id]]
-    halt 404, json({ error: 'Word not found' }) unless word
-    word.delete
-    "Word deleted: #{word.text}" + "\n"
-end
-
-# clear all words
-delete '/words' do
-    Word.dataset.delete
-    "All words deleted" + "\n"
+if __FILE__ == $PROGRAM_NAME
+    WordCLI.run
 end
