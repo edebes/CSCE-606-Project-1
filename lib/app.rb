@@ -23,7 +23,7 @@ class WordCLI
             puts "3. Update a word"
             puts "4. Delete a word"
             puts "5. Delete all words"
-            puts "6. Return to typing menu"
+            puts "6. Do a practice typing session"
             choice = gets.chomp.to_i
             case choice
             when 1
@@ -37,7 +37,7 @@ class WordCLI
             when 5
                 self.delete_all_words
             when 6
-                break # will return to typing menu once it has been implemented
+                self.practice_typing
             else
                 puts "Invalid option. Please try again."
             end
@@ -108,6 +108,23 @@ class WordCLI
             Word.dataset.delete
             puts "\nAll words deleted."
         end
+    end
+
+    def self.practice_typing
+        words = Word.all
+        if words.empty?
+            puts "\nNo words in wordbank."
+        else
+            puts "\nWords:"
+            words.each { |word|
+                print "#{word.text} "
+            }
+            puts ""
+        end
+        a = Time.new
+        user_input = gets.chomp
+        b = Time.new
+        puts b - a
     end
 end
 
