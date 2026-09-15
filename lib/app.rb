@@ -24,6 +24,7 @@ class WordCLI
             puts "4. Delete a word"
             puts "5. Delete all words"
             puts "6. Do a practice typing session"
+            puts "7. Exit"
             choice = gets.chomp.to_i
             case choice
             when 1
@@ -38,6 +39,8 @@ class WordCLI
                 self.delete_all_words
             when 6
                 self.practice_typing
+            when 7
+                exit(0)
             else
                 puts "Invalid option. Please try again."
             end
