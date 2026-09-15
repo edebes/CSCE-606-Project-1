@@ -131,7 +131,7 @@ class WordCLI
         a = Time.new
         user_input = gets.chomp
         b = Time.new
-        puts b - a
+        puts "That took you #{b - a} seconds"
     end
 end
 
