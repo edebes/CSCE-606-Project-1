@@ -129,9 +129,14 @@ class WordCLI
             puts ""
         end
         a = Time.new
-        user_input = gets.chomp
-        b = Time.new
-        puts "That took you #{b - a} seconds"
+        begin
+            user_input = gets.chomp
+        rescue Exception => e
+            puts "\nExiting typing session"
+        else
+            b = Time.new
+            puts "That took you #{b - a} seconds"
+        end
     end
 end
 
