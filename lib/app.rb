@@ -59,6 +59,10 @@ class WordCLI
     def self.add_word
         puts "\nEnter new word:"
         text = gets.chomp
+        if text[/\A[a-zA-Z]+\z/] != text
+            puts "\nInvalid word. Please enter a word with only letters."
+            return
+        end
         word = Word.create(text: text)
         puts "\nWord added: #{word.text}"
     end
