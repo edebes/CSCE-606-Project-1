@@ -2,8 +2,8 @@
 
 ## Session 1 - 2026/9/25
 
-Driver: 
-Navigator:
+Driver: Alex
+Navigator: Eric
 
 Work Completed:
 
@@ -16,3 +16,5 @@ Work Completed:
  \- Added workflow to the repository
 
 Notes:
+
+ \- Planned new session for the weekend
