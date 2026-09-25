@@ -15,16 +15,39 @@ end
 
 class WordCLI
     def self.run
-        puts "Welcome to the Wordbank!"
+        puts "\nWelcome to the Wordbank!"
         loop do
-            puts "\n\nPlease select an option:"
+            puts "\nPlease select an option:"
+            puts "1. Do a typing session"
+            puts "2. Manage Words"
+            puts "3. Leaderboard"
+            puts "4. Exit\n"
+            choice = gets.chomp.to_i
+            case choice
+            when 1
+                self.practice_typing
+            when 2
+                # go to database menu to manage words
+                self.manage_words
+            when 3
+                #leaderboard call
+            when 4
+                exit(0)
+            else
+                puts "Invalid option. Please try again."
+            end
+        end
+    end
+
+    def self.manage_words
+        puts "\nWelcome to the Wordbank!"
+        loop do
             puts "1. List all words"
             puts "2. Add a word"
             puts "3. Update a word"
             puts "4. Delete a word"
             puts "5. Delete all words"
-            puts "6. Do a practice typing session"
-            puts "7. Exit"
+            puts "6. Go Back\n"
             choice = gets.chomp.to_i
             case choice
             when 1
@@ -38,13 +61,13 @@ class WordCLI
             when 5
                 self.delete_all_words
             when 6
-                self.practice_typing
-            when 7
-                exit(0)
+                #go back to above menu
+                break
             else
                 puts "Invalid option. Please try again."
             end
         end
+            
     end
 
     def self.list_words
