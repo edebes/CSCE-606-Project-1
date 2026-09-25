@@ -2,6 +2,9 @@ require 'sinatra'
 require 'sinatra/json'
 require 'sequel'
 require 'json'
+require_relative 'leaderboard'
+require_relative 'typing_session.rb'
+require_relative 'manage_word.rb'
 
 DB = Sequel.connect('sqlite://api.db')
 DB.create_table? :words do
@@ -25,7 +28,7 @@ class WordCLI
             choice = gets.chomp.to_i
             case choice
             when 1
-                self.practice_typing
+                TypingSession.practice_typing
             when 2
                 # go to database menu to manage words
                 self.manage_words
@@ -137,28 +140,6 @@ class WordCLI
         if ans == 'y'
             Word.dataset.delete
             puts "\nAll words deleted."
-        end
-    end
-
-    def self.practice_typing
-        words = Word.all
-        if words.empty?
-            puts "\nNo words in wordbank."
-        else
-            puts "\nWords:"
-            words.each { |word|
-                print "#{word.text} "
-            }
-            puts ""
-        end
-        a = Time.new
-        begin
-            user_input = gets.chomp
-        rescue Exception => e
-            puts "\nExiting typing session"
-        else
-            b = Time.new
-            puts "That took you #{b - a} seconds"
         end
     end
 end
