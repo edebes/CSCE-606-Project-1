@@ -23,7 +23,7 @@ class AppCLI
                 # go to database menu to manage words
                 WordCLI.manage_words
             when 3
-                #leaderboard call
+                Leaderboard.display_leaderboard
             when 4
                 puts "\nExiting TypeNinja. Goodbye!"
                 break #exit(0)

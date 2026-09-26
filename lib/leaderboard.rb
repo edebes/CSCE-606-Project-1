@@ -6,9 +6,9 @@ require 'json'
 DB = Sequel.connect('sqlite://api.db')
 DB.create_table? :scores do
   primary_key :placement
-  Time :time, null: false
-  Integer :accuracy, null: false
-  Integer :cpm, null: false
+  Float :time, null: false
+  Float :accuracy, null: false
+  Float :cpm, null: false
 end
 
 class Score < Sequel::Model(:scores)
