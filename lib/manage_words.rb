@@ -37,6 +37,7 @@ class WordCLI
                 self.delete_all_words
             when 6
                 #go back to above menu
+                puts "\nReturning to typing menu\n\n"
                 break
             else
                 puts "Invalid option. Please try again."

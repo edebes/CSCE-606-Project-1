@@ -8,7 +8,7 @@ require_relative 'manage_words.rb'
 
 class AppCLI
     def self.run
-        puts "\nWelcome to the Wordbank!"
+        puts "\nWelcome to TypeNinja!"
         loop do
             puts "\nPlease select an option:"
             puts "1. Do a typing session"
@@ -25,7 +25,8 @@ class AppCLI
             when 3
                 #leaderboard call
             when 4
-                exit(0)
+                puts "\nExiting TypeNinja. Goodbye!"
+                break #exit(0)
             else
                 puts "Invalid option. Please try again."
             end
@@ -35,4 +36,5 @@ end
 
 if __FILE__ == $PROGRAM_NAME
     AppCLI.run
+    exit(0)
 end

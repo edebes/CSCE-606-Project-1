@@ -8,6 +8,7 @@ class TypingSession
         words = Word.all
         if words.empty?
             puts "\nNo words in wordbank."
+            return
         else
             puts "\nWords:"
             words.each { |word|

@@ -1,4 +1,4 @@
-require 'app'
+require 'manage_words'
 
 RSpec.describe Word do
   it 'creates a word' do
@@ -31,10 +31,12 @@ RSpec.describe Word do
     Word.dataset.delete
     expect(Word.count).to eq(0)
   end
+end
 
+RSpec.describe WordCLI do
   it 'runs the CLI' do
     allow_any_instance_of(Object).to receive(:gets).and_return("1", "6")
-    expect { WordCLI.run }.to output(/Welcome to the Wordbank!/).to_stdout
+    expect { WordCLI.manage_words }.to output(/Welcome to the Wordbank!/).to_stdout
   end
 
   it 'lists words in the CLI' do
@@ -104,6 +106,6 @@ RSpec.describe Word do
 
   it 'exits the CLI' do
     allow_any_instance_of(Object).to receive(:gets).and_return("6")
-    expect { WordCLI.run }.to output(/Return to typing menu/).to_stdout
+    expect { WordCLI.manage_words }.to output(/Returning to typing menu/).to_stdout
   end
 end
