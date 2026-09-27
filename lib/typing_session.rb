@@ -10,14 +10,13 @@ class TypingSession
         if words.empty?
             puts "\nNo words in wordbank."
             return
-        else
-            puts "\nWords:"
-            typing_words = words.shuffle
-            typing_words.each { |word|
-                print "#{word.text} "
-            }
-            puts ""
         end
+        puts "\nWords:"
+        typing_words = words.shuffle
+        typing_words.each { |word|
+            print "#{word.text} "
+        }
+        puts ""
         start_time = Time.new
         begin
             user_input = gets.chomp
@@ -25,7 +24,7 @@ class TypingSession
             puts "\nExiting typing session"
         else
             end_time = Time.new
-            accuracy = calculate_accuracy(user_input, words)
+            accuracy = calculate_accuracy(user_input, typing_words)
             cpm = calculate_cpm(user_input, end_time - start_time)
             placement = calculate_placement(cpm)
             puts "That took you #{end_time - start_time} seconds"
