@@ -12,7 +12,8 @@ class TypingSession
             return
         else
             puts "\nWords:"
-            words.each { |word|
+            typing_words = words.shuffle
+            typing_words.each { |word|
                 print "#{word.text} "
             }
             puts ""
