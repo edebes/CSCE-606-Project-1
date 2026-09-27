@@ -7,6 +7,13 @@ RSpec.describe AppCLI do
   end
 
   it 'enters typing session' do
+    Word.create(text: "test")
+    allow_any_instance_of(Object).to receive(:gets).and_return("1", "\n", "4")
+    expect { AppCLI.run }.to output(/Words:/).to_stdout
+  end
+
+  it 'exits typing session if wordbank is empty' do
+    Word.dataset.delete
     allow_any_instance_of(Object).to receive(:gets).and_return("1", "4")
     expect { AppCLI.run }.to output(/No words in wordbank./).to_stdout
   end
@@ -17,10 +24,10 @@ RSpec.describe AppCLI do
     expect { AppCLI.run }.to output(/Welcome to the Wordbank!/).to_stdout
   end
 
-#   it 'enters leaderboard' do
-#     allow_any_instance_of(Object).to receive(:gets).and_return("3", "4")
-#     expect { AppCLI.run }.to output(/Here are the top scores:/).to_stdout
-#   end
+  it 'enters leaderboard' do
+    allow_any_instance_of(Object).to receive(:gets).and_return("3", "4")
+    expect { AppCLI.run }.to output(/Here are the top scores:/).to_stdout
+  end
 
   it 'exits the CLI' do
     allow_any_instance_of(Object).to receive(:gets).and_return("4")

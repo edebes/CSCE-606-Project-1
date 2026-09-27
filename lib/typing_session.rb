@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/json'
 require 'sequel'
 require 'json'
+require_relative 'leaderboard'
 
 class TypingSession
     def self.practice_typing
@@ -16,19 +17,19 @@ class TypingSession
             }
             puts ""
         end
-        a = Time.new
+        start_time = Time.new
         begin
             user_input = gets.chomp
         rescue Exception => e
             puts "\nExiting typing session"
         else
-            b = Time.new
+            end_time = Time.new
             accuracy = calculate_accuracy(user_input, words)
-            cpm = calculate_cpm(user_input, b - a)
-            # Create a placement calculation to determine the placement
-            puts "That took you #{b - a} seconds"
+            cpm = calculate_cpm(user_input, end_time - start_time)
+            placement = calculate_placement(cpm)
+            puts "That took you #{end_time - start_time} seconds"
             puts "Your accuracy was #{accuracy}% and your CPM was #{cpm}."
-            Score.create(time: b - a, accuracy: accuracy, cpm: cpm)
+            Score.create(placement: placement,time: end_time - start_time, accuracy: accuracy, cpm: cpm)
         end
     end
 
@@ -46,5 +47,24 @@ class TypingSession
     def self.calculate_cpm(user_input, time_taken)
         cpm = (user_input.length.to_f / time_taken) * 60
         cpm.round(2)
+    end
+
+    def self.calculate_placement(cpm)
+        # Get all scores from the database
+        scores = Score.reverse_order(:cpm).all
+
+        # Find the placement based on the CPM
+        placement = 1
+        if scores.empty?
+            return placement
+        end
+        scores.each do |score|
+            if cpm > score.cpm
+                Leaderboard.update_placements(placement, cpm)
+                break
+            end
+            placement += 1
+        end
+        placement
     end
 end
