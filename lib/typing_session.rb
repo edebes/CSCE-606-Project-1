@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/json'
 require 'sequel'
 require 'json'
+require 'similar_text'
 require_relative 'leaderboard'
 
 class TypingSession
@@ -34,13 +35,8 @@ class TypingSession
     end
 
     def self.calculate_accuracy(user_input, words)
-        correct_chars = 0
         sentence = words.map(&:text).join(" ")
-        total_chars = sentence.length
-        user_input.chars.each_with_index do |char, index|
-            correct_chars += 1 if char == sentence[index]
-        end
-        accuracy = (correct_chars.to_f / total_chars) * 100
+        accuracy = user_input.similar(sentence)
         accuracy.round(2)
     end
 

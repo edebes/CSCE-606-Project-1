@@ -108,6 +108,7 @@ GEM
       console (~> 1.0)
     sequel (5.108.0)
       bigdecimal
+    similar_text (0.0.4)
     sinatra (4.2.1)
       logger (>= 1.6.0)
       mustermann (~> 3.0)
@@ -154,6 +155,7 @@ DEPENDENCIES
   rackup
   rspec
   sequel
+  similar_text
   sinatra
   sinatra-contrib
   sqlite3
@@ -205,6 +207,7 @@ CHECKSUMS
   rspec-support (3.13.7) sha256=0640e5570872aafefd79867901deeeeb40b0c9875a36b983d85f54fb7381c47c
   samovar (2.5.1) sha256=8a9fc41eb8868084f0321eb41678c485cfbc7d282fb306c0be67c3284b1d2394
   sequel (5.108.0) sha256=ae5996d1196775427916a2fa36e02f99762ead9affb8ea9b1aec2c0b16bdb3a3
+  similar_text (0.0.4) sha256=1575c23746460eed778eeeb66906b450ac80b9b92714eae4bc3a4c6b2be3fbae
   sinatra (4.2.1) sha256=b7aeb9b11d046b552972ade834f1f9be98b185fa8444480688e3627625377080
   sinatra-contrib (4.2.1) sha256=10d091c944d268aa910c618ea40a3c3ebe0533e6e32990d84af92235a3d26b4a
   sqlite3 (2.9.6-aarch64-linux-gnu) sha256=d8b1f7d23efd7abac285775a9566562fc7debfef79d594e3a20354406fb7907c
