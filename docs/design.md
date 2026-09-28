@@ -1,5 +1,6 @@
 ### System Architecture:
 Major Classes: Word, (Timer, Scoreboard, Accuracy are all WIP)
+
 Word is the database that stores the wordbank, allowing for users to add, update, remove, and view the words in the bank. The typing program pulls the words from the database to create sentences to practice typing. Timer both displays the time as the user is typing and stores the final time taken to complete the sentence. Accuracy maintains the ratio of correct characters typed to total characters, and Scoreboard takes a combination of Timer and Accuracy to rank each attempt against each other.
 
 ### User Interface Design:
