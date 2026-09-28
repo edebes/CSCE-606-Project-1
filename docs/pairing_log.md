@@ -6,19 +6,19 @@ Driver: Alex
 
 Navigator: Eric
 
-Work Completed:
+### Work Completed:
 
- \- Created sub-menu for database management
+- Created sub-menu for database management
 
- \- Finished mapping out final design implementation for leaderboard
+- Finished mapping out final design implementation for leaderboard
 
- \- Created class files for leaderboard, word management, and typing sessions
+- Created class files for leaderboard, word management, and typing sessions
 
- \- Added workflow to the repository
+- Added workflow to the repository
 
-Notes:
+### Notes:
 
- \- Planned new session for the weekend
+- Planned new session for the weekend
 
 ## Session 2 - 2026/9/26
 
@@ -26,12 +26,12 @@ Driver: Eric
 
 Navigator: Alex
 
-Work Completed:
+### Work Completed:
 
-\- Ranking Calculation
+- Ranking Calculation
 
-\- Updated typing session for word shuffling/accuracy
+- Updated typing session for word shuffling/accuracy
 
-\- Made test cases for leaderboard and typing session
+- Made test cases for leaderboard and typing session
 
-\- Updated main application test cases
+- Updated main application test cases
