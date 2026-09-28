@@ -1,9 +1,9 @@
+# User Stories
 - As a student,
 
     I want to maintain the word bank and add, edit, delete the words in it
 
     So that I can keep the practice material updated an stylized to my preferences (2 points)
-
 
 - As a student,
 
@@ -11,14 +11,11 @@
 
     I want to see the ranked leaderboard sorted in order from fastest to slowest (3 points)
 
-
 - As a student,
 
     I want to see my time after I finish typing
 
-  
     So that I can see how quickly it takes me to type (2 points)
-
   
 - As a student,
 
